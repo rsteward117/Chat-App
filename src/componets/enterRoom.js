@@ -18,8 +18,4 @@ function EnterRoom({setRoom}) {
   );
 }
 
-
-
-
-
 export default EnterRoom;
