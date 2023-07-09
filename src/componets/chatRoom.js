@@ -4,7 +4,7 @@ import {addDoc, collection, serverTimestamp, onSnapshot, query, where} from 'fir
 
 function ChatRoom({room}) {
   const [message, setMessage] = useState("")
-  const [messages, setMessages] =useState([])
+  const [messages, setMessages] = useState([])
 
   //this reference wwhich collection in the firebase database where the user can send and store their data(messages) in. 
   const messagesRef = collection(dataBase, "messages");

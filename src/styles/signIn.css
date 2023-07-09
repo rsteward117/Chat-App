@@ -1,0 +1,182 @@
+.sign-in-container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    width: 70%;
+    height: 75vh;
+    border-radius: 15px;
+    background-color: #343434;
+}
+
+.sign-in-header{
+    text-align: center;
+}
+
+.sign-in-header h1{
+    color: white;
+    font-weight: 600;
+    font-size: 2rem;
+}
+
+.sign-in-header h2{
+    color: gray;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.sign-in-methods-container{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+/* sign in with eamil/password section */
+
+.email-sign-in-container{
+    width: 100%;
+}
+
+.sign-in-method-header{
+    text-align: center;
+}
+
+.sign-in-method-header h2{
+    color: white;
+    font-size: 17px;
+    font-weight: 400;
+}
+
+.sign-in-form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-input{
+    padding: 15px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+}
+
+.form-input:focus{
+    background-color: #FAF9F6;
+    color: black;
+}
+
+.error{
+    color: red;
+    font-weight: 500;
+}
+
+.reset-password-btn{
+    color: #6495ED;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.reset-password-btn:hover{
+    text-decoration: underline;
+}
+
+.sign-in-form-btn{
+    padding: 15px;
+    font-size: 1rem;
+    font-weight: 600;
+    background-color: #6495ED;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.sign-in-form-btn:hover{
+    background-color: #7393B3;
+}
+
+.new-user-text{
+    color: white;
+    font-size: 1rem;
+}
+
+.new-user-btn{
+    color: #6495ED;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.new-user-btn:hover{
+    text-decoration: underline;
+}
+
+/*separation section  */
+.sign-in-separator-container{
+    padding: 1rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.sign-in-separator-container::after{
+    content: '';
+    position: absolute;
+    top: 1rem;
+    bottom: 1rem;
+    left: 50%;
+    border-right: 3px solid #CCC;
+    z-index: 1;
+}
+
+.sign-in-separator-container span{
+    padding: 1rem;
+    text-align: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    border-radius: 50%;
+    border: 1px solid #CCC;
+    background: #FFF;
+    display: block;
+    position: relative;
+    z-index: 2;
+    font-weight: 400;
+}
+
+/*sign in with social media section   */
+.social-media-sign-in-container{
+    width: 100%;
+    height: 50vh;
+}
+
+.btn-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.2rem;
+    margin-top: 7%;
+}
+
+.social-sign-in-btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    background-color: #6495ED;
+    color: white;
+    cursor: pointer;
+
+}
+
+.social-sign-in-btn:hover{
+    background-color: #7393B3;
+}
+
+.social-logo{
+    height: 2rem;
+}

@@ -6,6 +6,7 @@ import ChatRoom from './componets/chatRoom';
 import EnterRoom from './componets/enterRoom';
 import SignOut from './componets/signOut';
 import Register from './componets/register';
+import ResetPassword from './componets/resetPassword';
 
 const cookies = new Cookies();
 //you left of at 56:28 of the video
@@ -14,30 +15,37 @@ function App() {
   const [isSignIn, setIsSignIn] = useState(cookies.get("auth-token"));
   const [room, setRoom] = useState(null);
   const [newUser, setNewUser] = useState(false);
+  const [passwordReset, setPasswordReset] = useState(false);
 
-  if(newUser == true){
+
+  if(newUser){
     return(
-      <Register setNewUser={setNewUser}/>
+      <Register setNewUser={setNewUser} />
     )
   }
+
+  if(passwordReset){
+    return(
+      <ResetPassword setPasswordReset={setPasswordReset} />
+    )
+  }
+
 
   if(!isSignIn){
     return (
       <>
-        <SignIn setIsSignIn={setIsSignIn} setNewUser={setNewUser} />
+        <SignIn setIsSignIn={setIsSignIn} setNewUser={setNewUser} setPasswordReset={setPasswordReset} />
       </>
     )
   }
-  if(newUser == true){
-    return(
-      <Register />
-    )
-  }
+
+
+
   return(
     <>
       {room ?  <ChatRoom room={room}/> : <EnterRoom setRoom={setRoom} />}
 
-      <SignOut setRoom={setRoom} setIsSignIn={setIsSignIn}/>
+      <SignOut setRoom={setRoom} setIsSignIn={setIsSignIn} />
     </>
 
   )
