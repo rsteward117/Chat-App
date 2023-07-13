@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {auth, googleProvider, facebookProvider} from '../firebase-config.js';
+import {auth, googleProvider, facebookProvider, twitterProvider} from '../firebase-config.js';
 import {signInWithPopup, signInWithEmailAndPassword} from 'firebase/auth';
 import Cookies from 'universal-cookie';
 import '../styles/signIn.css'
@@ -114,6 +114,19 @@ function SignIn({setIsSignIn, setNewUser, setPasswordReset}) {
     }           
   }
 
+  const signInWithTwitter = async () => {
+    try{
+      const result = await signInWithPopup(auth, twitterProvider);
+      console.log(result);
+      //this sets a refresh token from firebase within cookie to the app so the user doesn't have to keep loging inwith google
+      cookies.set("auth-token", result.user.refreshToken);
+      setIsSignIn(true);
+      }
+    catch (err){
+      console.error(err);
+    }           
+  }
+
   return (
     <>
         <div className='sign-in-container'>
@@ -146,7 +159,8 @@ function SignIn({setIsSignIn, setNewUser, setPasswordReset}) {
               </header>
               <div className='btn-container'>
                 <button className='social-sign-in-btn' onClick={signInWithGoogle}><img className='social-logo' src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" /> Sign In with your Google Account </button>
-                <button className='social-sign-in-btn' onClick={signInWithFacebook}><img className='social-logo' src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/facebook/facebook-original.svg" /> Sign In with your facebook Account </button>
+                <button className='social-sign-in-btn' onClick={signInWithFacebook}><img className='social-logo' src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/facebook/facebook-original.svg" /> Sign In with your Facebook Account </button>
+                <button className='social-sign-in-btn' onClick={signInWithTwitter}><img className='social-logo' src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/twitter/twitter-original.svg" /> Sign In with your Twitter Account </button>
               </div>
             </section>
           </div>
