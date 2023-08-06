@@ -44,7 +44,6 @@ function App() {
   return(
     <>
       {room ?  <ChatRoom room={room}/> : <EnterRoom setRoom={setRoom} />}
-
       <SignOut setRoom={setRoom} setIsSignIn={setIsSignIn} />
     </>
 

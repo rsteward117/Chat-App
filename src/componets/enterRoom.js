@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import '../styles/enterRoom.css'
 
 function EnterRoom({setRoom}) {
 
@@ -10,9 +11,11 @@ function EnterRoom({setRoom}) {
   return (
     <>
         <div className='enter-room-container'>
-            <label>Enter Chat Room Name</label>
-            <input ref={roomInputRef}/>
-            <button onClick={ChangeRoom}>Enter Chat Room</button>
+          <form className='enter-room-form' onSubmit={ChangeRoom}>
+            <h1 className='enter-room-label'>Enter Chat Room Name</h1>
+            <input className='enter-room-input' ref={roomInputRef}/>
+            <button type='submit' className='enter-room-btn' >Enter Chat Room</button>
+          </form>
         </div>
     </>
   );
