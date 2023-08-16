@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {auth, dataBase} from '../firebase-config.js';
 import { useAuthState } from "react-firebase-hooks/auth";
-import {addDoc, collection, serverTimestamp, onSnapshot, query, where, orderBy} from 'firebase/firestore'
+import {addDoc, collection, serverTimestamp, onSnapshot, query, where, orderBy} from 'firebase/firestore';
 import "../styles/chatRoom.css"
 
 
@@ -17,6 +17,10 @@ function ChatRoom({room}) {
     e.preventDefault();
     if(message === "") return;
 
+    // this is the firebase timestamp I'm trying to convert.
+    // const messageDate = new Date(serverTimestamp);
+    // console.log(messageDate)
+    
     //this deconstucts the firebase auth.currentUser array
     const {uid, displayName, photoURL} = auth.currentUser;
     //this fulfills the promise to add a document to the "messages" collection with the currently logged in users message and profile info. 
