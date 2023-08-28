@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import './App.css';
+import { elastic  as Menu } from 'react-burger-menu';
 import SignIn from './componets/signIn';
 import Cookies from 'universal-cookie';
 import ChatRoom from './componets/chatRoom';
@@ -7,6 +8,8 @@ import EnterRoom from './componets/enterRoom';
 import SignOut from './componets/signOut';
 import Register from './componets/register';
 import ResetPassword from './componets/resetPassword';
+import Sidebar from './componets/sideBar';
+
 
 const cookies = new Cookies();
 //you left of at 56:28 of the video
@@ -44,7 +47,10 @@ function App() {
   return(
     <>
       {room ?  <ChatRoom room={room}/> : <EnterRoom setRoom={setRoom} />}
-      <SignOut setRoom={setRoom} setIsSignIn={setIsSignIn} />
+      <Menu>
+        <SignOut setRoom={setRoom} setIsSignIn={setIsSignIn} />
+        <Sidebar />
+      </Menu>
     </>
 
   )

@@ -16,10 +16,6 @@ function ChatRoom({room}) {
   const handleSubmitForm = async (e) =>{
     e.preventDefault();
     if(message === "") return;
-
-    // this is the firebase timestamp I'm trying to convert.
-    // const messageDate = new Date(serverTimestamp);
-    // console.log(messageDate)
     
     //this deconstucts the firebase auth.currentUser array
     const {uid, displayName, photoURL} = auth.currentUser;
@@ -64,7 +60,12 @@ function ChatRoom({room}) {
               <div className='message-text-container'>
                 <h2 className='user-name'>{message.user}</h2>
                 <p className='user-message'>{message.text}</p>
-                <p className='message-timestamp'>-{message.createdAt.toDate().toDateString()}</p>
+                {/* I had to create a conditional render, because serverTimestamp would return null every time a new message was submitted, so I added a if statement to create a placeholder render until serverTimestamp is finshed being created */}
+                {message.createdAt === null ?(
+                  <p>no time</p>
+                ):(
+                  <p className='message-timestamp'>-{message.createdAt.toDate().toDateString()}</p> 
+                )}
               </div>
             </div>
           </div>
