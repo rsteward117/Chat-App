@@ -1,0 +1,141 @@
+.customize-profile-container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: sans-serif;
+    width: 65%;
+    height: 90vh;
+    margin: 0 auto;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #4b5563;
+}
+
+.customize-profile-header{
+    display: flex;
+    width: 100%;
+    height: 20vh;
+    align-items: flex-start;
+    background-image: linear-gradient(to bottom right, #6495ED,#38bdf8,#06b6d4 );
+}
+
+.customize-profile-user-image{
+    width: 10%;
+    height: auto;
+    border-radius: 50%;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 5px;
+    border: 2px solid white;
+    box-shadow: -5px 3px 6px 2px #24282b;
+}
+
+.customize-profile-user-info{
+    margin-top: 20px;
+}
+
+.customize-profile-user-name{
+    font-weight: 900;
+    font-size: 1.5rem;
+    color: black;
+}
+
+.customize-profile-user-email{
+    font-weight: 400;
+    font-size: 1rem;
+    color: black;
+}
+
+.customization-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    margin-top: 3rem;
+}
+
+.customize-profile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.customize-profile-text-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.change-displayName{
+    padding: 10px;
+    margin-left: 1rem;
+    width: 50%;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+}
+
+.change-displayName:focus{
+    background-color: #FAF9F6;
+    color: black;
+}
+
+.change-displayName-btn{
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    background-color: #6495ED;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.change-displayName-btn:hover{
+    background-color: #7393B3;
+}
+
+.image-Card{
+    width: 40%;
+    padding: 50px;
+    border-radius: 15px;
+    background-image: linear-gradient(to bottom right, #EEEEEE,#FAF8F9,#FFFFFF );
+    display: flex;
+    flex-direction: column;
+    align-items: center;   
+}
+
+.change-img{
+    width: 65%;
+    margin-bottom: 30px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: -5px 3px 6px 2px #24282b;
+    display: flex;
+    align-self: center;
+}
+
+.change-img-btn{
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    background-color: #6495ED;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.change-img-btn:hover{
+    background-color: #7393B3;
+}
+
+.image-Card input{
+    display: none;
+}

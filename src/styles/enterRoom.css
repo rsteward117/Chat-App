@@ -44,3 +44,7 @@
     color: white;
     cursor: pointer;
 }
+
+.enter-room-btn:hover{
+    background-color: #7393B3;
+}

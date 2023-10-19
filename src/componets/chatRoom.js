@@ -3,12 +3,18 @@ import {auth, dataBase} from '../firebase-config.js';
 import { useAuthState } from "react-firebase-hooks/auth";
 import {addDoc, collection, serverTimestamp, onSnapshot, query, where, orderBy} from 'firebase/firestore';
 import "../styles/chatRoom.css"
+import { LuSend } from 'react-icons/lu';
 
+//redo the design of the chat app as well as add a way for users to send images in the chat
 
-function ChatRoom({room}) {
+function ChatRoom({room, setRoom}) {
   const [message, setMessage] = useState("")
   const [messages, setMessages] = useState([])
   const [user] = useAuthState(auth);
+
+  function exitChatRoom(){
+    setRoom(null);
+  }
 
   //this reference which collection in the firebase database where the user can send and store their data(messages) in. 
   const messagesRef = collection(dataBase, "messages");
@@ -50,6 +56,7 @@ function ChatRoom({room}) {
     <div className='chat-room-container'>
       <header className="header">
         <h1>{room}</h1>
+        <button onClick={exitChatRoom} className="chatroom-header-btn">Exit {room}'s ChatRoom?</button>
       </header>
       <div className='messages-container'>
         {messages.map((message) =>(
@@ -58,22 +65,24 @@ function ChatRoom({room}) {
             <div className='message-info' key={message.id}>
               <img className='user-image' src={message.userPic} alt='user image' />
               <div className='message-text-container'>
+                <section className='message-header'>
                 <h2 className='user-name'>{message.user}</h2>
-                <p className='user-message'>{message.text}</p>
                 {/* I had to create a conditional render, because serverTimestamp would return null every time a new message was submitted, so I added a if statement to create a placeholder render until serverTimestamp is finshed being created */}
                 {message.createdAt === null ?(
                   <p>no time</p>
                 ):(
-                  <p className='message-timestamp'>-{message.createdAt.toDate().toDateString()}</p> 
+                  <p className='message-timestamp'>-{message.createdAt.toDate().toDateString()}</p>
                 )}
+                </section>
+                <p className='user-message'>{message.text}</p>
               </div>
             </div>
           </div>
         ))}
       </div>
       <form onSubmit={handleSubmitForm} className='chat-room-form'>
-        <input className='chat-room-input' placeholder='Type your messages here' onChange={(e) => setMessage(e.target.value)} value={message}/>
-        <button type="submit" className='chat-room-btn' >Send Message</button>
+        <input className='chat-room-input' placeholder='Type your message here' onChange={(e) => setMessage(e.target.value)} value={message}/>
+        <button type="submit" className='chat-room-btn' > <LuSend /> </button>
       </form>
 
     </div>

@@ -1,18 +1,22 @@
 import React, { useState, useRef } from 'react';
+import { Link, Route, Routes } from "react-router-dom";
 import './App.css';
-import { elastic  as Menu } from 'react-burger-menu';
 import SignIn from './componets/signIn';
 import Cookies from 'universal-cookie';
 import ChatRoom from './componets/chatRoom';
 import EnterRoom from './componets/enterRoom';
-import SignOut from './componets/signOut';
 import Register from './componets/register';
 import ResetPassword from './componets/resetPassword';
-import Sidebar from './componets/sideBar';
+import Sidebar, { SideBarItem } from './componets/sideBar';
+import CustomizeProfile from './componets/customizeProfile';
+import { MdDashboardCustomize } from 'react-icons/md';
+import { MdOutlineChat } from 'react-icons/md';
+import { FaHome } from 'react-icons/fa';
+import { MdSettings } from 'react-icons/md';
+
 
 
 const cookies = new Cookies();
-//you left of at 56:28 of the video
 function App() {
   //this UseState is checking if the user is signed in or not. by searching the "auth-token" that was created in the signIn componet.
   const [isSignIn, setIsSignIn] = useState(cookies.get("auth-token"));
@@ -20,12 +24,12 @@ function App() {
   const [newUser, setNewUser] = useState(false);
   const [passwordReset, setPasswordReset] = useState(false);
 
-
   if(newUser){
     return(
       <Register setNewUser={setNewUser} />
     )
   }
+  
 
   if(passwordReset){
     return(
@@ -43,14 +47,24 @@ function App() {
   }
 
 
-
+// work on adding react routes for the sidebar links
   return(
     <>
-      {room ?  <ChatRoom room={room}/> : <EnterRoom setRoom={setRoom} />}
-      <Menu>
-        <SignOut setRoom={setRoom} setIsSignIn={setIsSignIn} />
-        <Sidebar />
-      </Menu>
+      <Sidebar setRoom={setRoom} setIsSignIn={setIsSignIn}>
+          <Link to="/enterRoom">
+            <SideBarItem icon={<FaHome  size={20}/>} text="Home"/>
+          </Link>
+          <Link to="/customizeProfile">
+            <SideBarItem icon={<MdDashboardCustomize  size={20}/>} text="Customize Profile"/>
+          </Link>
+          <SideBarItem icon={<MdOutlineChat  size={20}/>} text="Chats"/>
+          <SideBarItem icon={<MdSettings  size={20}/>} text="Settings"/>
+      </Sidebar>
+      <Routes>
+        <Route path='/enterRoom' element={room ?  <ChatRoom room={room} setRoom={setRoom}/> : <EnterRoom setRoom={setRoom} />} />
+        <Route path='/customizeProfile' element={<CustomizeProfile />} />
+      </Routes>
+
     </>
 
   )
