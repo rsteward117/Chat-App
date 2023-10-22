@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import {auth, dataBase} from '../firebase-config.js';
 import { onAuthStateChanged, updateProfile } from 'firebase/auth';
+import { getStorage, ref, uploadBytes, getDownloadURL} from 'firebase/storage'
 import PulseLoader from "react-spinners/PulseLoader";
 import "../styles/customizeProfile.css"
 
@@ -10,6 +11,17 @@ function CustomizeProfile() {
   const [displayName, setDisplayName] = useState('');
   const [profilePic, setProfilePic] = useState(null);
   
+  const uploadImageToStorage = async (imageFile, userId) =>{
+    const storage = getStorage();
+    const storageRef = ref(storage, 'profilePics/' + userId);
+
+    await uploadBytes(storageRef, imageFile);
+
+    const url = await getDownloadURL(storageRef);
+
+    return url;
+  }
+
   const UpdateDisplayName = async () =>{
     await updateProfile(auth.currentUser, {
       displayName: displayName
@@ -20,14 +32,17 @@ function CustomizeProfile() {
     })
   }
 
-  const updateProfilePic = async () =>{
-    await updateProfile(auth.currentUser, {
-      photoURL: profilePic
-    }).then(() =>{
-  
-    }).catch((err) => {
-      console.log(err)
-    })
+  const updateProfilePic = async () => {
+    try {
+      const userId = auth.currentUser.uid;
+      const photoURL = await uploadImageToStorage(profilePic, userId);
+
+      await updateProfile(auth.currentUser, {
+        photoURL
+      });
+    } catch(e){
+      console.log(e);
+    }
   }
 
 
