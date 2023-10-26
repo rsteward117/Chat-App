@@ -67,7 +67,7 @@ function CustomizeProfile() {
           <div className='image-Card'>
             <img className='change-img' src={firebaseUserInfo?.photoURL || <PulseLoader color={loaderColor}/>} />
             <label className='change-img-btn' onClick={updateProfilePic} for='input-file'>Upload image</label>
-            <input type='file' name="myImage" onChange={(e) =>{ console.log(e.target.files[0]); setProfilePic(e.target.files[0])}} id='input-file' />
+            <input type='file' name="myImage" onChange={(e) =>{ setProfilePic(e.target.files[0]) }} id='input-file' />
           </div>
         </section>
       </div>
