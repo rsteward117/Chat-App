@@ -82,7 +82,7 @@
     justify-content: space-between;
 }
 
-.user-image{
+.user-Profile-pic{
     width: 60px;
     height: 60px;
     border-radius: 50%;
@@ -114,6 +114,11 @@
     font-weight: 300;
 }
 
+.user-image{
+    width: 50vh;
+    height: 50vh;
+}
+
 .message-timestamp{
     font-weight: bold;
     font-size: 0.9rem;
@@ -136,6 +141,30 @@
     padding: 3px;
     border-radius: 5px 5px 5px 15px;
     color: black;
+}
+
+.chat-room-image-btn{
+    border: none;
+    outline: none;
+    background: #3b5998;
+    color: #fff;
+    padding: 5px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-weight: bold; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.chat-room-image-btn{
+
+}
+
+.chat-room-image-input{
+    display: none;
 }
 
 .chat-room-btn{

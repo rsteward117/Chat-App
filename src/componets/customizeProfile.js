@@ -1,25 +1,29 @@
 import React, { useState, useRef, useEffect } from 'react';
-import {auth, dataBase} from '../firebase-config.js';
+import {auth, dataBase, facebookProvider} from '../firebase-config.js';
 import { onAuthStateChanged, updateProfile } from 'firebase/auth';
-import { getStorage, ref, uploadBytes, getDownloadURL} from 'firebase/storage'
+import { getStorage, ref, uploadBytes, getDownloadURL} from 'firebase/storage';
 import PulseLoader from "react-spinners/PulseLoader";
 import "../styles/customizeProfile.css"
+import CustomizeProfileImageCard from './customizeProfileImageCard.js';
 
 function CustomizeProfile() {
   const [firebaseUserInfo, setFirebaseUserInfo] = useState(auth.currentUser);
   const [loaderColor, setLoaderColor] = useState("#6495ED");
   const [displayName, setDisplayName] = useState('');
+  const [loading, setLoading] = useState(false);
   const [profilePic, setProfilePic] = useState(null);
+  const [photoURL, setPhotoURL] = useState();
+
   
-  const uploadImageToStorage = async (imageFile, userId) =>{
+
+  const uploadImageToStorage = async (imageFile, user, setLoading) =>{
     const storage = getStorage();
-    const storageRef = ref(storage, 'profilePics/' + userId);
-
-    await uploadBytes(storageRef, imageFile);
-
-    const url = await getDownloadURL(storageRef);
-
+    const fileRef = ref(storage, user.uid + '/profilesPics')
+    setLoading(true);
+    await uploadBytes(fileRef, imageFile);
+    const url = await getDownloadURL(fileRef);
     return url;
+    setLoading(false);
   }
 
   const UpdateDisplayName = async () =>{
@@ -34,20 +38,25 @@ function CustomizeProfile() {
 
   const updateProfilePic = async () => {
     try {
-      const userId = auth.currentUser.uid;
-      const photoURL = await uploadImageToStorage(profilePic, userId);
-
+      const userId = firebaseUserInfo.uid;
+      const photoURL = await uploadImageToStorage(profilePic, userId, setLoading);
       await updateProfile(auth.currentUser, {
         photoURL
       });
-    } catch(e){
+    } catch(e) {
       console.log(e);
     }
   }
 
+  useEffect(() => {
+      onAuthStateChanged(auth, setFirebaseUserInfo)
+    }, []);
 
-
-  useEffect(() => onAuthStateChanged(auth, setFirebaseUserInfo), []);
+  useEffect(() => {
+    if(firebaseUserInfo?.photoURL){
+      setPhotoURL(firebaseUserInfo.photoURL);
+    }
+  }, [firebaseUserInfo]);
 
   return (
     <>
@@ -66,8 +75,8 @@ function CustomizeProfile() {
           </form>
           <div className='image-Card'>
             <img className='change-img' src={firebaseUserInfo?.photoURL || <PulseLoader color={loaderColor}/>} />
-            <label className='change-img-btn' onClick={updateProfilePic} for='input-file'>Upload image</label>
-            <input type='file' name="myImage" onChange={(e) =>{ setProfilePic(e.target.files[0]) }} id='input-file' />
+            <label className='change-img-btn' disabled={loading} onClick={updateProfilePic} for='input-file'>Upload image</label>
+            <input type='file' name="myImage" onChange={(e) =>{ console.log(e.target.files[0]); setProfilePic(e.target.files[0])}}  id='input-file' />
           </div>
         </section>
       </div>

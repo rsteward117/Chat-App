@@ -9,6 +9,7 @@ import Register from './componets/register';
 import ResetPassword from './componets/resetPassword';
 import Sidebar, { SideBarItem } from './componets/sideBar';
 import CustomizeProfile from './componets/customizeProfile';
+import Chats from './componets/chats';
 import { MdDashboardCustomize } from 'react-icons/md';
 import { MdOutlineChat } from 'react-icons/md';
 import { FaHome } from 'react-icons/fa';
@@ -51,18 +52,22 @@ function App() {
   return(
     <>
       <Sidebar setRoom={setRoom} setIsSignIn={setIsSignIn}>
-          <Link to="/enterRoom">
+          <Link to="/">
             <SideBarItem icon={<FaHome  size={20}/>} text="Home"/>
           </Link>
-          <Link to="/customizeProfile">
+          <Link to="/CustomizeProfile">
             <SideBarItem icon={<MdDashboardCustomize  size={20}/>} text="Customize Profile"/>
           </Link>
-          <SideBarItem icon={<MdOutlineChat  size={20}/>} text="Chats"/>
+          <Link to="/chats">
+            <SideBarItem icon={<MdOutlineChat  size={20}/>} text="Chats"/>
+          </Link>
+
           <SideBarItem icon={<MdSettings  size={20}/>} text="Settings"/>
       </Sidebar>
       <Routes>
-        <Route path='/enterRoom' element={room ?  <ChatRoom room={room} setRoom={setRoom}/> : <EnterRoom setRoom={setRoom} />} />
-        <Route path='/customizeProfile' element={<CustomizeProfile />} />
+        <Route path='/' element={room ?  <ChatRoom room={room} setRoom={setRoom}/> : <EnterRoom setRoom={setRoom} />} />
+        <Route path='/CustomizeProfile' element={<CustomizeProfile />} />
+        <Route path='/Chats' element={<Chats />}/>
       </Routes>
 
     </>

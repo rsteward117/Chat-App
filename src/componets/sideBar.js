@@ -15,7 +15,7 @@ const cookies = new Cookies();
 function Sidebar({setIsSignIn, setRoom, children}) {
     const [firebaseUserInfo, setFirebaseUserInfo] = useState(auth.currentUser);
     const [loaderColor, setLoaderColor] = useState("#6495ED");
-    const [expanded, setExpanded] = useState(true)
+    const [expanded, setExpanded] = useState(false);
     
     //this use effect keeps track of, if the current firebase user is still authorized
     useEffect(() => onAuthStateChanged(auth, setFirebaseUserInfo), []);
