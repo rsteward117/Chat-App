@@ -67,7 +67,7 @@ function App() {
       <Routes>
         <Route path='/' element={room ?  <ChatRoom room={room} setRoom={setRoom}/> : <EnterRoom setRoom={setRoom} />} />
         <Route path='/CustomizeProfile' element={<CustomizeProfile />} />
-        <Route path='/Chats' element={<Chats />}/>
+        <Route path='/Chats' element={<Chats setRoom={setRoom} />}/>
       </Routes>
 
     </>

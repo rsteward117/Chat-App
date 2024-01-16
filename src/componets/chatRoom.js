@@ -3,7 +3,7 @@ import {auth, dataBase} from '../firebase-config.js';
 import { useAuthState } from "react-firebase-hooks/auth";
 import {addDoc, collection, serverTimestamp, onSnapshot, query, where, orderBy} from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL} from 'firebase/storage';
-import "../styles/chatRoom.css"
+import "../styles/chatRoom.css";
 import { LuSend } from 'react-icons/lu';
 import { BsFillImageFill } from 'react-icons/bs';
 
@@ -22,7 +22,9 @@ function ChatRoom({room, setRoom}) {
   }
 
   //this reference which collection in the firebase database where the user can send and store their data(messages) in. 
-  const messagesRef = collection(dataBase, "messages");
+  const chatRoomMessagesRef = collection(dataBase, `ChatRooms/${room}/messages`);
+
+
   // firebase collection reference for your images.
   const imagesRef = collection(dataBase, "images");
 
@@ -43,7 +45,7 @@ function ChatRoom({room, setRoom}) {
     //this deconstucts the firebase auth.currentUser array
     const {uid, displayName, photoURL} = auth.currentUser;
     //this fulfills the promise to add a document to the "messages" collection with the currently logged in users message and profile info. 
-    await addDoc(messagesRef, {
+    await addDoc(chatRoomMessagesRef, {
       text: message,
       createdAt: serverTimestamp(),
       user: displayName,
@@ -76,7 +78,7 @@ function ChatRoom({room, setRoom}) {
 
   //this useEffect keeps track of which room the user is in
   useEffect(() => {
-    const queryMessages = query(messagesRef, where("room", "==", room), orderBy("createdAt"));
+    const queryMessages = query(chatRoomMessagesRef, where("room", "==", room), orderBy("createdAt"));
     const unsuscribe = onSnapshot(queryMessages, (snapshot)=> {
       let messages = [];
       snapshot.forEach((doc) =>{
