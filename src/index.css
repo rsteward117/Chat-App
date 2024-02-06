@@ -1,3 +1,16 @@
+:root{
+ --body_background: #121212;
+ --body_text_color: black; 
+}
+
+[data-theme="light"]{
+  --body_background: #f5f5f5;
+}
+
+*{
+  transition: all 0.3s ease-in-out;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

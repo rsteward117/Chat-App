@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import {auth, dataBase, facebookProvider} from '../firebase-config.js';
 import { onAuthStateChanged, updateProfile } from 'firebase/auth';
 import { getStorage, ref, uploadBytes, getDownloadURL} from 'firebase/storage';
 import PulseLoader from "react-spinners/PulseLoader";
+import { MdArrowBack } from 'react-icons/md';
 import "../styles/customizeProfile.css"
 import CustomizeProfileImageCard from './customizeProfileImageCard.js';
 
@@ -13,8 +15,12 @@ function CustomizeProfile() {
   const [loading, setLoading] = useState(false);
   const [profilePic, setProfilePic] = useState(null);
   const [photoURL, setPhotoURL] = useState();
+  const navigate = useNavigate();
 
   
+  const backToSettings = () =>{
+    navigate('/settings');
+  }
 
   const uploadImageToStorage = async (imageFile, user, setLoading) =>{
     const storage = getStorage();
@@ -62,9 +68,15 @@ function CustomizeProfile() {
     <>
       <div className='customize-profile-container'>
       <header className='customize-profile-header'>
-        <img className='customize-profile-user-image' src={firebaseUserInfo?.photoURL || <PulseLoader color={loaderColor}/>} />
-        <section className='customize-profile-user-info' >
-          <h2 className='customize-profile-user-name'>{firebaseUserInfo?.displayName || <PulseLoader color={loaderColor}/>} </h2>
+        <section className='customize-profile-header-section1'>
+          <MdArrowBack className='back-to-settings-btn' onClick={backToSettings} />
+        </section>
+        <section className='customize-profile-header-section2'>
+          <h1 className='customize-profile-header-name'>Account Settings</h1>
+        </section>
+        <section className='customize-profile-header-section3'>
+          <img className='customize-profile-user-image' src={firebaseUserInfo?.photoURL || <PulseLoader color={loaderColor}/>} />
+          <p className='customize-profile-user-name'>{firebaseUserInfo?.displayName || <PulseLoader color={loaderColor}/>} </p>
           <p className='customize-profile-user-email'>{firebaseUserInfo?.email || <PulseLoader color={loaderColor}/>} </p>
         </section>
       </header>

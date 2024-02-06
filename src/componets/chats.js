@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import {collection, query, getDocs, where, onSnapshot, orderBy} from 'firebase/firestore';
 import {auth, dataBase} from '../firebase-config.js';
 import { onAuthStateChanged } from 'firebase/auth';
@@ -7,18 +8,17 @@ import '../styles/chats.css'
 
 
 function Chats({setRoom}) {
+  //useStates and useRef
   const [chatRoomData, setChatRoomData] = useState([]);
-
-  const currentChatroom = useRef(null);
+  const navigate = useNavigate();
   
   //the function that suppose to get the current value of the clicked mapped element.
-  const getChatroom = (e) =>{
-    console.log(currentChatroom.current);
-    //this is a proped useState i'm trying to set the name of the clicked chat room name to. 
-    setRoom(currentChatroom.current);
+  const getChatroom = (chatRoomName) =>{
+    setRoom(chatRoomName);
+    navigate('/');
   }
 
-  //this useffect get the data from firebase, based on if the user has visted them.
+  //this useffect gets the data from firebase, based on if the user has visted them.
   useEffect(() =>{
     onAuthStateChanged(auth, currentUser => {
       const chatRoomCollectionRef = collection(dataBase, 'ChatRooms');
@@ -53,7 +53,9 @@ function Chats({setRoom}) {
             <div className='users-chatRooms-container' key={data.id}>
               <div className='users-chatRooms-card'>
                 {/* the mapped from the firebase array I'm trying to get the chatroom name from */}
-                <button className='users-chatRoom-names-btn'><h2 className='users-chatRoom-names' ref={currentChatroom} onClick={getChatroom}>{data.chatRoom}</h2></button>
+                <button className='users-chatRoom-names-btn' onClick={() => getChatroom(data.chatRoom)}>
+                  <h2 className='users-chatRoom-names'>ChatRoom: {data.chatRoom}</h2>
+                </button>
                 <p className='users-chatRoom-latest-text'>{data.text}</p>
                 {data.timeStamp === null ?(
                   <p>no time</p>

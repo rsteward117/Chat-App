@@ -1,5 +1,10 @@
-body{
+/* body{
   background: radial-gradient(circle at 23% 37.8%, #868f96 0%, #596164 100%);
+  width: 100%;
+} */
+
+body{
+  background: var(--body_background);
   width: 100%;
 }
 

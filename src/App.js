@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes} from "react-router-dom";
 import './App.css';
 import SignIn from './componets/signIn';
 import Cookies from 'universal-cookie';
@@ -14,6 +14,8 @@ import { MdDashboardCustomize } from 'react-icons/md';
 import { MdOutlineChat } from 'react-icons/md';
 import { FaHome } from 'react-icons/fa';
 import { MdSettings } from 'react-icons/md';
+import Settings from './componets/settings';
+import CustomizeApp from './componets/CustomizeApp';
 
 
 
@@ -55,19 +57,19 @@ function App() {
           <Link to="/">
             <SideBarItem icon={<FaHome  size={20}/>} text="Home"/>
           </Link>
-          <Link to="/CustomizeProfile">
-            <SideBarItem icon={<MdDashboardCustomize  size={20}/>} text="Customize Profile"/>
-          </Link>
           <Link to="/chats">
             <SideBarItem icon={<MdOutlineChat  size={20}/>} text="Chats"/>
           </Link>
-
-          <SideBarItem icon={<MdSettings  size={20}/>} text="Settings"/>
+          <Link to="/settings">
+            <SideBarItem icon={<MdSettings  size={20}/>} text="Settings"/>
+          </Link>
       </Sidebar>
       <Routes>
         <Route path='/' element={room ?  <ChatRoom room={room} setRoom={setRoom}/> : <EnterRoom setRoom={setRoom} />} />
-        <Route path='/CustomizeProfile' element={<CustomizeProfile />} />
         <Route path='/Chats' element={<Chats setRoom={setRoom} />}/>
+        <Route path='/settings' element={<Settings />}/>
+        <Route path='/CustomizeProfile' element={<CustomizeProfile />} />
+        <Route path='/CustomizeApp' element={<CustomizeApp />} />
       </Routes>
 
     </>

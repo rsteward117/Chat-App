@@ -3,49 +3,83 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     font-family: sans-serif;
     width: 65%;
     height: 90vh;
-    margin: 0 auto;
     border-radius: 10px;
+    box-shadow: 0px 2px 2px 3px rgb(6 182 212);
     overflow: hidden;
-    background-color: #4b5563;
+    background-color: #343434;
 }
 
 .customize-profile-header{
     display: flex;
     width: 100%;
     height: 20vh;
-    align-items: flex-start;
     background-image: linear-gradient(to bottom right, #6495ED,#38bdf8,#06b6d4 );
 }
 
+.customize-profile-header-section1{
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    text-align: left;
+}
+
+.back-to-settings-btn{
+    background-color: rgb(243, 244, 246, 1);
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+    cursor: pointer;
+    font-size: 3rem;
+    padding-right: 12px;
+    border-radius: 0px 0px 35px 0px;
+}
+
+.back-to-settings-btn:hover{
+    background-color: rgb(209, 213, 219, 1)
+}
+
+.customize-profile-header-section2{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.customize-profile-header-name{
+    font-weight: 900;
+    font-size: 2rem;
+    color: black;
+}
+
+.customize-profile-header-section3{
+    flex: 1;
+    text-align: right;
+}
+
+.customize-profile-user-info{
+    width: 100%;
+}
+
 .customize-profile-user-image{
-    width: 10%;
-    height: auto;
+    display: block;
+    margin-right: 0;
+    margin-left: auto;
+    width: 30%;
     border-radius: 50%;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 5px;
     border: 2px solid white;
     box-shadow: -5px 3px 6px 2px #24282b;
 }
 
-.customize-profile-user-info{
-    margin-top: 20px;
-}
-
 .customize-profile-user-name{
     font-weight: 900;
-    font-size: 1.5rem;
+    font-size: 1rem;
     color: black;
 }
 
 .customize-profile-user-email{
-    font-weight: 400;
+    font-weight: 900;
     font-size: 1rem;
     color: black;
 }

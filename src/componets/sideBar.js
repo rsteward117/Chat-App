@@ -29,7 +29,7 @@ function Sidebar({setIsSignIn, setRoom, children}) {
 
   return (
     <aside className={` h-screen transition-all  ${expanded ? "w-2/12" : "w-20"}`}>
-      <nav className="h-full flex flex-col bg-gray-600 border-r shadow-sm">
+      <nav className="h-full flex flex-col bg-gray-600 border-cyan-500 border-r-2 shadow-sm">
         <div className="p-1.5 flex justify-between items-center">
           <img src="http://img.logoipsum.com/243.svg" className={`overflow-hidden transition-all ${expanded ? "w-32" : "w-0"}`} alt='chat app logo'/>
           <button onClick={() => setExpanded(current => !current)} className={`overflow-hidden transition-all bg-gray-100 hover:bg-gray-300 ${expanded ? "p-2 rounded-lg " : "p-2.5 mr-5 rounded-lg" }`}>
@@ -39,7 +39,7 @@ function Sidebar({setIsSignIn, setRoom, children}) {
         <SidebarContext.Provider value={{ expanded }}>
           <ul className="flex-1 px-3"> {children} </ul>
         </SidebarContext.Provider>
-        <div className="border-t flex p-3">
+        <div className="border-t-2 border-cyan-500 flex p-3">
           <img className={`rounded-full transition-all ${expanded ? "w-15 h-10" : "w-20 h-15"}`} src={firebaseUserInfo?.photoURL || <PulseLoader color={loaderColor} />} />
           <div className={`flex justify-between items-center 
             overflow-hidden transition-all ${expanded ? "w-52 ml-3" : "w-0"}
@@ -56,8 +56,6 @@ function Sidebar({setIsSignIn, setRoom, children}) {
   );
 }
 
-
-//you left off at 4:11 on the video
 
  export function SideBarItem({icon, text, active, alert}){
     const { expanded } = useContext(SidebarContext)
